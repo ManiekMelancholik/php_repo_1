@@ -1,0 +1,86 @@
+if($count==0){
+  echo "Wrong usser index or password";
+  $sqlQuestion=
+  "SELECT attempts
+  FROM loginfo
+  WHERE userId='$log'";
+  $connection->query("UPDATE loginfo SET attempts=3 WHERE loginfo='$log'");
+}else{
+  $sqlQuestion=
+  "SELECT attempts
+  FROM loginfo
+  WHERE userId='$log'";
+  $connection->query("UPDATE loginfo SET attempts=($connection->query($sqlQuestion)-1) WHERE loginfo='$log'");
+  $DBans->close();
+
+  $sqlQuestion=
+  "SELECT name
+  FROM users
+  WHERE indexNum='$log'";
+  $DBans=@$connection->query($sqlQuestion);
+  echo"You have logged as $DBans";
+  $DBans->close();
+
+
+
+  <?php
+  session_start();
+  if(!$_SESSION['dataBaseCon']){
+    $_SESSION['dataBaseCon']=$DBcon;
+    echo 'added';
+  }else{
+    echo 'already there';
+  //if(isset($_POST['userN'])and isset($_POST['userP'])){
+  require_once 'DB/dataBaseConection.php';
+  //$connection=@new mysqli($host,$db_user,$db_pas,$db_name);
+  //if($connection->connect_errno!=0){
+
+  if(!$_SESSION['dataBaseCon']){
+    echo 'Couldnt connect to data base';
+    //echo "Error".$connection->connect_errno," Descryption".$connection->connect_error;
+  }else{
+      //echo 'Connected successfully';
+    //echo 'itWorked';
+
+      $log=$_POST['userN'];
+      $pas=$_POST['userP'];
+
+      $sqlQuestion=
+      " SELECT userInd, password, attempts
+        FROM loginfo
+        WHERE userInd='$log'and password='$pas';"
+      ;
+      //$DBans=@$DBcon->query($sqlQuestion);
+      $DBans=@$_SESSION['dataBaseCon']->query($sqlQuestion);
+      $row=@mysqli_fetch_array($DBans);
+
+      if(!$row==null){
+
+        }
+        $sqlQuestion=
+        " SELECT name, surrname
+          FROM users
+          WHERE indexNum='$log';";
+
+          $DBans=@$_SESSION['dataBaseCon']->query($sqlQuestion);
+          $row=@mysqli_fetch_array($DBans);
+
+        echo ("LOGED IN AS
+         ");
+      //echo @$row['userInd'];
+      //echo @$row['password'];
+      //echo @$row['attempts'];
+
+    }else{
+      echo "WRONG PASSWORD OR USSER INDEX";
+    }
+
+  }
+
+  echo<<<END
+  <br>
+  <a href='index.php'> BACK </a>
+  <br>
+  END;
+
+  //}
