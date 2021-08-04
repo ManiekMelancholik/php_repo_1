@@ -20,13 +20,16 @@ define("registerPage",'php/register/registerPage.php');
 //    SHOP
 define("shop",'php/shop/shop.php');
 //    TEMPLATES
-define("inpForm",'templates/inputForm.php');
+//define("inpForm",'templates/inputForm.php'); // ##NO LONGER USED
 define("topMenu",'templates/topMenu.php');
 define("HEAD",'templates/htmlHEAD.php');
-
+//++  FACTORY TEMPLATES
+define("FInpForm",'php/classes/Factory/FactoryTemplates/inputForm.php');
 //    CLASSES
-
+define("COOKIEMENAGER",'php/classes/CookieMenager.php');
+define("FACTORY",'php/classes/Factory/Factory.php');
 define("USER",'php/classes/User.php');
+define("CHECKER",'php/classes/Checker.php');
 //    INDEX
 define("INDEX",'index.php');
 //

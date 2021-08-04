@@ -1,5 +1,9 @@
 <?php
-function createInputInstance($autoCheck,$action,$method,$numOfElements,$inpType,$inpVarName,$formDivClass="",$inpDivClass="",$inpClass="",$submitClass="",$submitValue=""){
+//NO LONGER USED, SEE PHP/CLSSES/FACTORY/FACTORYTEMPLATES/INPUTFORM.PHP
+
+
+/*
+function createInputInstance($autoCheck,$action,$method,$numOfElements,$inpType,$inpVarName,$inpText,$inpValue,$formDivClass="",$inpDivClass="",$inpClass="",$submitClass="",$submitValue=""){
 
 $error= false;
 if($autoCheck==true){
@@ -48,23 +52,24 @@ if($autoCheck==true){
 }
 
 if($error==false){
-  $inpDivClass=array_merge($inpDivClass,  array_fill(count($inpDivClass),  ($numOfElements-count($inpDivClass)),   $inpDivClass[count($inpDivClass)]));
-  $inpDivClass=array_merge($inpVarName,   array_fill(count($inpVarName),   ($numOfElements-count($inpVarName)),    $inpVarName[count($inpVarName)]));
-  $inpDivClass=array_merge($inpType,      array_fill(count($inpType),      ($numOfElements-count($inpType)),       $inpType[count($inpType)]));
-  $inpDivClass=array_merge($inpClass,     array_fill(count($inpClass),     ($numOfElements-count($inpClass)),      $inpClass[count($inpClass)]));
+  $inpDivClass=array_merge($inpDivClass,    array_fill(count($inpDivClass),  ($numOfElements-count($inpDivClass)),   $inpDivClass[count($inpDivClass)]));
+  $inpVarName=array_merge($inpVarName,      array_fill(count($inpVarName),   ($numOfElements-count($inpVarName)),    $inpVarName[count($inpVarName)]));
+  $inpType=array_merge($inpType,            array_fill(count($inpType),      ($numOfElements-count($inpType)),       $inpType[count($inpType)]));
+  $inpClass=array_merge($inpClass,          array_fill(count($inpClass),     ($numOfElements-count($inpClass)),      $inpClass[count($inpClass)]));
+  $inpValue=array_merge($inpValue,          array_fill(count($inpValue),     ($numOfElements-count($inpValue)),      $inpValue[count($inpValue)]));
 
-echo <<<END
-<div clas=$formDivClass>
-  <form action=$action method=$method>
+echo ("<div clas=$formDivClass>
+  <form action=$action method=$method>");
     for($i=0; $i<$numOfElements; $i++){
-      <div class=$inpDivClass[$i]>
-        <input type=$inpType[$i] name=$inpVarName[$i] class=$inpClass[$i]>
-      </div>
+      echo ("<div class=$inpDivClass[$i]>
+              $inpText[$i]
+              <input type=$inpType[$i] name=$inpVarName[$i] class=$inpClass[$i] value=$inpValue[$i]>
+            </div>");
     }
-    <input type="submit" class=$submitClass value=$submitValue>
+echo ("<input type='submit' class=$submitClass value=$submitValue>
   </form>
-</div>
-END;
+</div>");
+
 }
 
 }

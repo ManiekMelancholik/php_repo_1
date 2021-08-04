@@ -77,3 +77,8 @@ a:link{
   text-align: center;
   margin:auto;
 }
+.IDC{
+  float: right;
+  background-color: pink;
+  padding: 20px;
+}

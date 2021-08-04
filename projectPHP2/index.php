@@ -19,20 +19,25 @@ require_once $RLVL.'includer.php';
       ?>
       <div class='pageContent'>
 <?php
-/*
+
       //callLoginForm('User Number', 'Password', 'LOG IN');
     //echo  @$_GET['menut'];
       //($autoCheck,$action,$method,$numOfElements,$inpType,$inpVarName,$formDivClass="",$inpDivClass="",$inpClass="",$submitClass="",$submitValue=""){
 
-
-      $alfa =12;
-      $alfa=array($alfa);
-      $alfa=array_merge($alfa, array_fill(1,3,'beta'));
+      /*
+      $alfa =array(12);
+      echo($alfa[0]);
+      function addArra($arr){
+        $arr[1]=9;
+        $arr[2]='War';
+        return $arr;
+      }
+      $alfa=addArra($alfa);
       echo "$alfa[0]<hr>";
 
       echo "$alfa[1]<hr>";
       echo "$alfa[2]<hr>";
-//*/
+      //*/
     ?>
 
   </div>

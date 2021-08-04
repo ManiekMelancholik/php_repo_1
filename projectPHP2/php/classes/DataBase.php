@@ -39,6 +39,28 @@ class DataBase{
       return false;
     }
   }
+  //NO OVERLOADING :/
+  //FUNCTION CHECKS IF THERE EXISTS USER WITH CERTAIN E-MAIL ADRESS
+  public function RegisterCheck($email){
+
+    $sqlQuestion=
+    " SELECT userInd, password, attempts
+      FROM loginfo
+      WHERE e-mail='$email';
+    ";
+    try{
+      $DBans=$this->DBcon->query($sqlQuestion);
+
+    }catch(Exception $E){
+      echo('<br>OOPS COULD NOT CONNECT TO DATA BASE<br><br>');
+    }
+
+    if($DBans){
+      return true;
+    }else{
+      return false;
+    }
+  }
 //FUNCTION RETURNS INFORMATION TO CREATE NEW USER
   public function GetLoggerInfo($log){
 
@@ -60,13 +82,7 @@ class DataBase{
         echo('<br>PROBLEM OCCURED WHILE AQUIRING ESENTIAL DATA<br><br>');
       }
   }
-//FUNCTION CHECKS IF THERE EXISTS USER WITH CERTAIN E-MAIL ADRESS
-  public function ExistanceCheck(){
-    $sqlQuestion=
-    " SELECT ;
 
-    ";
-  }
 
 
 }
