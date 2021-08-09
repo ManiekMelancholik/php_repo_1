@@ -37,16 +37,16 @@ class CM{
   }
   public function CookieDeleteRegister($names,$noe){
     for($i=0;$i<$noe;$i++){
-      if(isset($_COOKIE[ $names[$i] ])){
+      //if(isset($_COOKIE[ $names[$i] ])){
         setcookie($names[$i],$_POST[$names[$i]],time()-3600);
-      }
-      
+      //}
+
     }
   }
   public function CookieDeleteCookie($name){
-    if(isset($_COOKIE[$name])){
+    //if(isset($_COOKIE[$name])){
       setcookie($name,'',time()-3600);
-    }
+    //}
 
   }
 }

@@ -5,6 +5,8 @@ require_once $RLVL.'includer.php';
 require_once $RLVL.COOKIEMENAGER;
 //TEMPLATS
 require_once $RLVL.FInpForm;
+require_once $RLVL.FClicDiv;
+
 
 class Factory{
   private static Factory $instance;
@@ -70,5 +72,12 @@ class Factory{
   );
   //AT LEAST
   FTemplateCallInput($passArr);
+  }
+  public function FCreateClickDivTemplate($action,$classNum,$value){
+    $divClassesSet=array();
+    $divClassesSet[0]='continue';
+    $divClassesSet[1]='register';
+    //...
+    FTemplateCallClickDiv($action,$divClassesSet[ $classNum ],$value);
   }
 }

@@ -25,10 +25,30 @@ class Checker{
     }
     if($n==$noe){
       return true;
-      //echo 'TRUE';
+      echo 'TRUE';
     }else{
-      //echo 'FALSE';
+      return false;
+      echo 'FALSE';
+    }
+  }
+  public function CheckerEmailAdress($name){
+    if(str_contains($name,';')){
       return false;
     }
+    $arr=explode('',$name);
+    $arr = array();
+  }
+  public function CheckerInputCheck($inp){
+    $decision=true;
+    $banedChars='"'."'".';*=+-#';
+    for($i=0; $i<strlen($inp); $i++){
+      if(str_contains($banedChars, $inp[ $i ])) {
+        $decision=false;
+        break;
+      }
+
+    }
+    echo "Please dont use any of the following $banedChars ";
+    return $decision;
   }
 }

@@ -12,6 +12,8 @@ getHEAD($RLVL);
 //if(isset($_POST['userN'])and isset($_POST['userP'])){
 require_once $RLVL.DATABASE;
 require_once $RLVL.USER;
+require_once $RLVL.CHECKER;
+require_once $RLVL.FACTORY;
 include_once $RLVL.topMenu;
 
 //$connection=@new mysqli($host,$db_user,$db_pas,$db_name);
@@ -32,87 +34,48 @@ include_once $RLVL.topMenu;
   <div class='pageContent'>
 <?php
 
-//if(!$DBcon){
-  //echo 'Couldnt connect to data base';
-  //echo "Error".$connection->connect_errno," Descryption".$connection->connect_error;
-//}else{
-  //echo 'Connected successfully';
-//echo 'itWorked';
-/*
-  $log=$_POST['userN'];
-  $pas=$_POST['userP'];
-
-  $sqlQuestion=
-  " SELECT userInd, password, attempts
-    FROM loginfo
-    WHERE userInd='$log'and password='$pas';"
-  ;
-
-
-  $DBans=@$DBcon->query($sqlQuestion);
-  $row=@mysqli_fetch_array($DBans);
-//*/
-  //if(!$row==null)
   $dataBase=DataBase::GetInstance();
-  if($dataBase->LogInCheck($_POST['userN'],$_POST['userP'])){
+  $checker=Checker::GetInstance();
+  $factory=Factory::GetInstance();
+  if($checker->CheckerInputCheck($_POST['userN'])){
+    if($checker->CheckerInputCheck($_POST['userP'])){
+      if($dataBase->LogInCheck($_POST['userN'],$_POST['userP'])){
+            $row=$dataBase->GetLoggerInfo($_POST['userN']);
+            $siteUser=new User($row['name'],$row['surrname'],$row['privLvl']);
+            $_SESSION['user']=true;
+            $_SESSION['user.Name']=$siteUser->getUserName();
+            $_SESSION['user.Surrname']=$siteUser->getUserSurrname();
+            $_SESSION['user.PrivLvl']=$siteUser->getUserPrivLvl();
+            if(isset($_SESSION['user'])){
+              echo "<br>LOGED IN <br><br>";
 
-    //session_start();
-    //$_SESSION['dataBaseCon']=$DBcon;
+            }else{
+              echo "<br>COULDNT LOG IN <br><br>";
+            }
 
+      }else{
+        echo "<br>WRONG PASSWORD OR USSER INDEX<br><br>";
+        $factory->FCreateClickDivTemplate($RLVL.loginPage,0,'RETRY');
 
-/*
-    $sqlQuestion=
-    " SELECT name, surrname, privLvl
-      FROM users
-      WHERE indexNum='$log';"
-      ;
-
-      $DBans=$_SESSION['dataBaseCon']->query($sqlQuestion);
-      $row=@mysqli_fetch_array($DBans);
-//*/
-    //echo "LOGED IN AS :: ";
-    //echo $row['name'];
-    //echo "  ";
-    //echo $row['surrname'];
-    //=================================================================
-    //user
-
-    //tak w sumie to poniżej nie ma sensu XD
-    //można by odrazu zapisywać do _SESSION bez wzywania konstruktora
-    
-
-        $row=$dataBase->GetLoggerInfo($_POST['userN']);
-        $siteUser=new User($row['name'],$row['surrname'],$row['privLvl']);
-        $_SESSION['user']=true;
-        $_SESSION['user.Name']=$siteUser->getUserName();
-        $_SESSION['user.Surrname']=$siteUser->getUserSurrname();
-        $_SESSION['user.PrivLvl']=$siteUser->getUserPrivLvl();
-        if(isset($_SESSION['user'])){
-          echo "<br>LOGED IN <br><br>";
-
-        }else{
-          echo "<br>COULDNT LOG IN <br><br>";
-        }
-    //=================================================================
-
-  //echo @$row['userInd'];
-  //echo @$row['password'];
-  //echo @$row['attempts'];
-  //sesion_close();
-  }else{
-    echo "<br>WRONG PASSWORD OR USSER INDEX<br><br>";
-    $RETRY=$RLVL.loginPage;
-    echo<<<END
-    <a href=$RETRY>
-    <div class='continue'>
-     RETRY<br>
-     ...
-    </div>
-    </a>
-    END;
+        /*
+        $RETRY=$RLVL.loginPage;
+        echo<<<END
+        <a href=$RETRY>
+        <div class='continue'>
+         RETRY<br>
+         ...
+        </div>
+        </a>
+        END;
+        //*/
+      }
+    }
   }
 
+
 //}
+$factory->FCreateClickDivTemplate($RLVL.INDEX,0,'CONTINUE TO MAIN');
+/*
 $IND=$RLVL.INDEX;
 echo<<<END
 <a href=$IND>
@@ -122,7 +85,7 @@ echo<<<END
 </div>
 </a>
 END;
-
+//*/
 //}
 ?>
 </div>

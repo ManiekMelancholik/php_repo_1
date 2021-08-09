@@ -25,6 +25,7 @@ define("topMenu",'templates/topMenu.php');
 define("HEAD",'templates/htmlHEAD.php');
 //++  FACTORY TEMPLATES
 define("FInpForm",'php/classes/Factory/FactoryTemplates/inputForm.php');
+define("FClicDiv",'php/classes/Factory/FactoryTemplates/ClickableDiv.php');
 //    CLASSES
 define("COOKIEMENAGER",'php/classes/CookieMenager.php');
 define("FACTORY",'php/classes/Factory/Factory.php');
